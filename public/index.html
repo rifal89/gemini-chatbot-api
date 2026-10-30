@@ -1,39 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gemini AI Chatbot - Pastel Green</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Chef Marco - Culinary AI Chat Room</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
 </head>
-<body>
-  <div class="container">
-    <header class="chat-header">
-      <div class="avatar">🌿</div>
-      <div class="header-info">
-        <h1>Gemini AI Assistant</h1>
-        <span class="status-badge"><span class="status-dot"></span> Online</span>
+<body class="fullscreen-app">
+  <div class="chat-app">
+    <!-- Header Chat Room Fullscreen -->
+    <header class="app-header">
+      <div class="header-container">
+        <div class="header-left">
+          <div class="chef-avatar">
+            <span>👨‍🍳</span>
+            <span class="online-indicator" title="Chef is Ready"></span>
+          </div>
+          <div class="chef-details">
+            <div class="chef-title-row">
+              <h2>Chef Marco</h2>
+              <span class="chef-badge">Executive Chef</span>
+            </div>
+            <p class="chef-subtitle">
+              <span>20+ Thn International Restaurant</span>
+              <span class="dot-separator">•</span>
+              <span class="status-text">Siap Membimbing</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <span class="theme-tag">🍽️ Culinary Room</span>
+        </div>
       </div>
     </header>
 
-    <div id="chat-box" class="chat-box"></div>
+    <!-- Main Chat Area (Scrollable Feed) -->
+    <main class="chat-main">
+      <div class="chat-wrapper">
+        <div id="chat-box" class="chat-box">
+          <!-- Welcome Culinary Banner -->
+          <div class="welcome-card">
+            <div class="welcome-badge">Bon Appétit! ✨</div>
+            <div class="welcome-icon">🍳</div>
+            <h3>Selamat Datang di Dapur Chef Marco</h3>
+            <p>
+              Halo! Saya adalah <strong>Executive Chef</strong> dengan pengalaman 20 tahun di industri kuliner internasional. 
+              Tanyakan apa saja seputar <em>resep, teknik memasak, food science, rahasia bumbu,</em> hingga <em>tips plating profesional</em>.
+            </p>
+            <div class="quick-prompts-label">Coba topik populer ini:</div>
+            <div class="quick-chips">
+              <button type="button" class="chip" data-prompt="Bagaimana teknik memasak steak medium rare yang juicy dengan pan-searing?">
+                🥩 Steak Juicy Sempurna
+              </button>
+              <button type="button" class="chip" data-prompt="Bocorkan rahasia membuat pasta Carbonara autentik tanpa cream!">
+                🍝 Authentic Carbonara
+              </button>
+              <button type="button" class="chip" data-prompt="Bagaimana cara emulsifikasi saus dan kaldu agar tidak pecah?">
+                🥣 Rahasia Emulsifikasi Saus
+              </button>
+              <button type="button" class="chip" data-prompt="Beri ide olahan makanan lezat berbahan dada ayam agar tidak kering.">
+                🍗 Kreasi Dada Ayam Lembut
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
 
-    <form id="chat-form">
-      <input type="text" id="user-input" placeholder="Ketik pesan Anda di sini..." autocomplete="off" required />
-      <button type="submit" id="send-btn">
-        <span>Kirim</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="22" y1="2" x2="11" y2="13"></line>
-          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-        </svg>
-      </button>
-    </form>
+    <!-- Bottom Fixed Input Area -->
+    <footer class="app-footer">
+      <div class="footer-container">
+        <form id="chat-form">
+          <div class="input-wrapper">
+            <span class="input-icon">🍳</span>
+            <input 
+              type="text" 
+              id="user-input" 
+              placeholder="Tanyakan resep, teknik memasak, atau tips kuliner..." 
+              autocomplete="off" 
+              required 
+            />
+            <button type="submit" id="send-btn" title="Kirim Pesan">
+              <span>Kirim</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+        </form>
+        <div class="footer-caption">
+          <span>🌿 Konsultasi kuliner profesional dengan Chef AI</span>
+          <span class="dot-separator">•</span>
+          <span>Fokus seputar dunia memasak & resep</span>
+        </div>
+      </div>
+    </footer>
   </div>
 
-  <!-- Marked library for parsing Markdown to HTML -->
+  <!-- Marked library for Markdown formatting -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="script.js"></script>
 </body>

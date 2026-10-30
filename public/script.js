@@ -7,6 +7,16 @@ const submitButton = form.querySelector('button');
 // [{ role: 'user', text: '...' }, { role: 'model', text: '...' }]
 const conversation = [];
 
+// Quick prompt chip click handler
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const prompt = chip.getAttribute('data-prompt');
+    if (!prompt) return;
+    input.value = prompt;
+    form.dispatchEvent(new Event('submit', { cancelable: true }));
+  });
+});
+
 form.addEventListener('submit', async function (e) {
   e.preventDefault();
 
@@ -22,7 +32,7 @@ form.addEventListener('submit', async function (e) {
   if (submitButton) submitButton.disabled = true;
 
   // 2. Show temporary "Thinking..." bot message with spinner
-  const botMessageElement = appendMessage('bot', 'Thinking...');
+  const botMessageElement = appendMessage('bot', 'Chef Marco sedang menyiapkan jawaban...');
   botMessageElement.classList.add('thinking');
 
   // 3. Track user turn in conversation history
@@ -51,20 +61,20 @@ form.addEventListener('submit', async function (e) {
       botMessageElement.innerHTML = renderMarkdown(data.result);
       conversation.push({ role: 'model', text: data.result });
     } else {
-      botMessageElement.textContent = 'Sorry, no response received.';
+      botMessageElement.textContent = 'Maaf, tidak ada tanggapan yang diterima dari dapur.';
       conversation.pop(); // Revert user message from history on missing response
     }
   } catch (error) {
     console.error('Chat error:', error);
     botMessageElement.classList.remove('thinking');
-    botMessageElement.textContent = 'Failed to get response from server.';
+    botMessageElement.textContent = 'Gagal menghubungi server. Pastikan koneksi backend aktif.';
     conversation.pop(); // Revert user message from history on request failure
   } finally {
     // 6. Re-enable form controls, focus input, and scroll to bottom
     input.disabled = false;
     if (submitButton) submitButton.disabled = false;
     input.focus();
-    chatBox.scrollTop = chatBox.scrollHeight;
+    scrollToBottom();
   }
 });
 
@@ -119,6 +129,17 @@ function appendMessage(sender, text) {
   msg.classList.add('message', sender);
   msg.textContent = text;
   chatBox.appendChild(msg);
-  chatBox.scrollTop = chatBox.scrollHeight;
+  scrollToBottom();
   return msg;
+}
+
+/**
+ * Smoothly scrolls the chat viewport to the bottom.
+ */
+function scrollToBottom() {
+  const scrollTarget = chatBox.closest('.chat-wrapper') || chatBox;
+  scrollTarget.scrollTo({
+    top: scrollTarget.scrollHeight,
+    behavior: 'smooth'
+  });
 }
